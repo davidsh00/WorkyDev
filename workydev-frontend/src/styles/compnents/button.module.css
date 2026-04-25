@@ -1,0 +1,27 @@
+.buttonContainer {
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  min-width: 6rem;
+  background-color: red;
+  border-radius: 1rem;
+  color: white;
+  background: linear-gradient(
+    270deg,
+    var(--gradient-primary-color) 1%,
+    var(--gradient-secondary-color) 99%
+  );
+  background-size: 100%;
+}
+.buttonContainer:hover {
+  background-size: 150%;
+}
+.buttonContainer button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  font-weight: 700;
+}
