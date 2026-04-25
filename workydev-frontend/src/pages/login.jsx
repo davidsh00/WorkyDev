@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Head from "next/head";
-import styles from "@/styles/Login.module.css";
+import styles from "@/styles/pages/Login.module.css";
 import FormControl from "@/components/formControl";
 import Button from "@/components/button";
 
@@ -13,17 +13,17 @@ export default function Login() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={`${styles.page}`}>
-        <div className={`${styles["login-box"]}`}>
+      <div className={styles.page}>
+        <div className={styles.loginBox}>
           <Image
-            className={`${styles["login-image"]}`}
+            className={styles.loginImage}
             alt="login-background"
             src="/assets/images/login_bg.png"
             width={1000}
             height={1000}
           />
-          <div className={`${styles["login-left"]}`}>
-            <div className={`${styles["login-text"]}`}>
+          <div className={styles.loginLeft}>
+            <div className={styles.loginText}>
               <h1>Welcome to WORKY</h1>
               <p>
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum
@@ -33,10 +33,15 @@ export default function Login() {
               </p>
             </div>
           </div>
-          <div className={`${styles["login-right"]}`}>
-            <form className={`${styles["login-form"]}`}>
-              <Image src={"/favicon.ico"} width={100} height={100} title="WorkyDev Logo"/>
-              <h2 className="form-title">USER LOGIN</h2>
+          <div className={styles.loginRight}>
+            <form className={styles.loginForm}>
+              <Image
+                src={"/favicon.ico"}
+                width={100}
+                height={100}
+                title="WorkyDev Logo"
+              />
+              <h2>USER LOGIN</h2>
               <FormControl
                 type={"text"}
                 FaIcon="FaUser"
