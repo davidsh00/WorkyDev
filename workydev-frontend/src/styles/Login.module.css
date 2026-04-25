@@ -1,11 +1,13 @@
 .page {
-    --gradient-primary-color:#6453ed;
-    --gradient-secondary-color :#c069c5;
+  --gradient-primary-color: #6453ed;
+  --gradient-secondary-color: #c069c5;
   --background: #eee;
   --foreground: #fff;
 
   --text-primary: #000;
   --text-secondary: #666;
+  --text-color-light: #ffffff;
+  --text-color-dark: #202020;
 
   --button-primary-hover: #383838;
   --button-secondary-hover: #f2f2f2;
@@ -16,13 +18,100 @@
   align-items: center;
   justify-content: center;
   font-family: var(--font-geist-sans);
-  background: linear-gradient(120deg,var(--gradient-primary-color),var(--gradient-secondary-color));
+  background: linear-gradient(
+    120deg,
+    var(--gradient-primary-color),
+    var(--gradient-secondary-color)
+  );
 }
-.login-box{
-    border-radius: .3rem;
-    background-color: white;
-    max-width: 1000px;
-    min-width: 400px;
-    min-height: 300px;
-    box-shadow: 0px 0px 15px 15px rgba(0,0,0,.15);
+.login-box {
+  padding-top: 4rem;
+  position: relative;
+  z-index: 1;
+  width: 90vw;
+  border-radius: 0.3rem;
+  background-color: white;
+  max-width: 1300px;
+  height: 100vh;
+  max-height: 600px;
+  box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, 0.15);
+  display: flex;
+}
+.login-right {
+  transition: all 0.3s ease-in-out;
+  color: var(--text-color-light);
+  flex-basis: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  padding: 1rem;
+}
+.login-left {
+  transition: all 0.3s ease-in-out;
+  color: var(--text-color-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex-basis: 0%;
+  overflow: hidden;
+}
+
+.login-image {
+  transition: all 0.3s ease-in-out;
+  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  filter: blur(0.2rem);
+}
+
+.login-text {
+  transition: all 0.1s ease-in-out;
+  opacity: 0;
+  margin-top: 20%;
+  max-width: 600px;
+}
+.login-text h1 {
+  word-spacing: 1rem;
+  font-size: 3.5rem;
+}
+.login-text p {
+  margin-top: 1rem;
+  line-height: 1.5rem;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.login-form h2 {
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 500px) {
+  .login-box{
+      padding-top: 0;
+  }
+  .login-left {
+    flex-basis: 65%;
+    padding: 2rem;
+  }
+  .login-right {
+    align-items: center;
+    color: var(--text-color-dark);
+    flex-basis: 35%;
+  }
+  .login-image {
+    filter: blur(0rem);
+    width: 65%;
+  }
+  .login-text {
+    opacity: 1;
+  }
 }
