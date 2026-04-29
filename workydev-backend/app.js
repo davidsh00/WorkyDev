@@ -1,13 +1,29 @@
 const express = require('express');
+const { resourceUsage } = require('node:process');
+const sqlite = require('node:sqlite');
+const DB = new sqlite.DatabaseSync('worky.db');
 
 const app = express();
 const port = 3000;
 
-// APIs about login
-app.get('/api/loginuser',(req,res) =>{
+app.use(express.json());
 
+// APIs about login
+app.post('/api/loginuser',(req,res) =>{
+    const login_query = DB.prepare('SELECT ID FROM Users WHERE COD_USERNAME = ? AND COD_PASSWORD = ?');
+    const result = login_query.all(req.body.username,req.body.password);
+    if(result.length == 1)
+    {
+        res.status(200).json({result:"success",user_id:result[0].ID});
+    }
+    else
+    {
+        res.status(400).json({result:"username or password is incorrect."});
+    }
 })
-app.update('/api/changepassword',(req,res) =>{
+
+
+app.post('/api/changepassword',(req,res) =>{
     
 })
 
@@ -20,10 +36,10 @@ app.get('/api/userworks/{user_id}',(req,res) =>{
 
 // APIs about CRUD on work table    
 })
-app.post('/api/insertwork',(req,res) =>{
+app.put('/api/insertwork',(req,res) =>{
     
 })
-app.update('/api/updatework',(req,res) =>{
+app.post('/api/updatework',(req,res) =>{
     
 })
 app.delete('/api/deletework',(req,res) =>{
