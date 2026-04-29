@@ -22,9 +22,27 @@ app.post('/api/loginuser',(req,res) =>{
     }
 })
 
-
 app.post('/api/changepassword',(req,res) =>{
-    
+    const login_query = DB.prepare('SELECT ID FROM Users WHERE COD_EMAIL = ?');
+    const result = login_query.all(req.body.email);
+    if(result.length == 1)
+    {
+        // res.status(200).json({result:"success",user_id:result[0].ID});
+        const update_password_query = DB.prepare('UPDATE Users SET COD_PASSWORD = ? WHERE ID = ?');
+        const update_result = update_password_query.run(req.body.password,result[0].ID);
+        if(update_result.changes == 1)
+        {
+            res.status(200).json({result:"success"});
+        }
+        else
+        {
+           res.status(400).json({result:"bad request"}); 
+        }
+    }
+    else
+    {
+        res.status(400).json({result:"bad request"});
+    }    
 })
 
 // APIs about the main page
