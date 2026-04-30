@@ -1,29 +1,4 @@
-.page {
-  --gradient-primary-color: #6453ed;
-  --gradient-secondary-color: #c069c5;
-  --background: #eee;
-  --foreground: #fff;
 
-  --text-primary: #000;
-  --text-secondary: #666;
-  --text-color-light: #ffffff;
-  --text-color-dark: #202020;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
-  display: flex;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
-  background: linear-gradient(
-    120deg,
-    var(--gradient-primary-color),
-    var(--gradient-secondary-color)
-  );
-}
 .loginBox {
   padding-top: 4rem;
   position: relative;
