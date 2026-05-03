@@ -1,15 +1,6 @@
 .workPage {
 }
 .main {
-  padding-top: 4rem;
-  position: relative;
-  z-index: 1;
-  width: 90vw;
-  border-radius: 0.3rem;
-  background-color: white;
-  max-width: 800px;
-  height: 100vh;
-  max-height: 600px;
-  box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, 0.15);
+  padding:1rem;   
   display: flex;
 }

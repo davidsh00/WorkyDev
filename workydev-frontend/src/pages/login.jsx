@@ -14,7 +14,7 @@ export default function Login() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="page">
-        <div className={styles.loginBox}>
+        <div className={`${styles.loginBox} main`}>
           <Image
             className={styles.loginImage}
             alt="login-background"

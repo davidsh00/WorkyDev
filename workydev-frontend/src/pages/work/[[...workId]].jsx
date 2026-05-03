@@ -1,4 +1,4 @@
-import styles from '@/styles/pages/work.module.css'
+import styles from "@/styles/pages/work.module.css";
 import { useRouter } from "next/router";
 
 export default function WorkForm() {
@@ -8,5 +8,13 @@ export default function WorkForm() {
     workId = router.query.workId[0];
   }
 
-  return <>workId:{workId}</>;
+  return (
+    <>
+      <div className={`${styles.workPage} page`}>
+        <div className={`${styles.main} main`}>
+          hello world
+        </div>
+      </div>
+    </>
+  );
 }
