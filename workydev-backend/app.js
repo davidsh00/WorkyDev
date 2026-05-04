@@ -121,9 +121,29 @@ app.get('/api/userworks/:userId',(req,res) =>{
     res.status(200).send(userWorksAgg);
 })
 
+
 // APIs about CRUD on work table
 app.put('/api/insertwork',(req,res) =>{
-    
+    // TODO: handle rollback if failed
+    //{"user_id":"","dat_start":"","dat_end":"",projects:[{"id":""}]}
+    const insertWorkQuery = DB.prepare(`INSERT INTO Works (DAT_START,DAT_END,USER_ID) VALUES (?,?,?)`);
+    const workResult = insertWorkQuery.run(req.body.dat_start,req.body.dat_end,req.body.user_id);
+    if(workResult.changes != 1) {res.status(400).json({result:"bad request"});}
+
+    const getWorkIdQuery = DB.prepare(`SELECT ID FROM Works WHERE ROWID = ?`);
+    const workId = getWorkIdQuery.all(workResult.lastInsertRowid)[0].ID;
+
+    if(req.body.projects.length)
+    {
+        const insertWorkprojectQuery = DB.prepare(`INSERT INTO Workprojects (WORK_ID,PROJECT_ID) VALUES (?,?)`);
+        req.body.projects.forEach(project => {
+            const projectResult = insertWorkprojectQuery.run(workId,project.id);
+            if(projectResult.changes != 1) {res.status(400).json({result:"bad request"});}
+        });
+
+    }
+
+    res.status(200).json({result:"success",work_id:workId});
 })
 app.post('/api/updatework',(req,res) =>{
     
