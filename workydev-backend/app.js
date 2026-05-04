@@ -172,7 +172,16 @@ app.post('/api/updatework',(req,res) =>{
     res.status(200).json({result:"success",work_id:workId});    
 })
 app.delete('/api/deletework',(req,res) =>{
-    
+    //{"work_id":0}
+    const deleteWorkpojectsQuery = DB.prepare(`DELETE FROM Workprojects WHERE WORK_ID = ?`);
+    const deleteWorkpojectsResult = deleteWorkpojectsQuery.run(req.body.work_id);
+    if(deleteWorkpojectsResult.changes != 1) {res.status(400).json({result:"bad request"});}    
+
+    const deleteWorkQuery = DB.prepare(`DELETE FROM Works WHERE ID = ?`);
+    const deleteWorkResult = deleteWorkQuery.run(req.body.work_id);
+    if(deleteWorkResult.changes != 1) {res.status(400).json({result:"bad request"});}   
+
+    res.status(200).json({result:"success"});
 })
 
 
