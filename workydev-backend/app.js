@@ -145,8 +145,31 @@ app.put('/api/insertwork',(req,res) =>{
 
     res.status(200).json({result:"success",work_id:workId});
 })
+
 app.post('/api/updatework',(req,res) =>{
+
+    // TODO: handle rollback if failed
+    //{"work_id":"","dat_start":"","dat_end":"",projects:[{"id":""}]}
+    const updateWorkQuery = DB.prepare(`UPDATE Works SET DAT_START = ?, DAT_END = ? WHERE ID = ?`);
+    const workResult = updateWorkQuery.run(req.body.dat_start,req.body.dat_end,req.body.work_id);
+    if(workResult.changes != 1) {res.status(400).json({result:"bad request"});}
+
+    const workId = req.body.work_id;
+
+    const deleteWorkprojectsQuery = DB.prepare(`DELETE FROM Workprojects WHERE WORK_ID = ?`);
+    const deleteWorkProjectsResult = deleteWorkprojectsQuery.run(workId);
+
+    if(req.body.projects.length)
+    {
+        const insertWorkprojectQuery = DB.prepare(`INSERT INTO Workprojects (WORK_ID,PROJECT_ID) VALUES (?,?)`);
+        req.body.projects.forEach(project => {
+            const projectResult = insertWorkprojectQuery.run(workId,project.id);
+            if(projectResult.changes != 1) {res.status(400).json({result:"bad request"});}
+        });
+
+    }
     
+    res.status(200).json({result:"success",work_id:workId});    
 })
 app.delete('/api/deletework',(req,res) =>{
     
