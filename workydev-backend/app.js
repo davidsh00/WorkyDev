@@ -91,6 +91,7 @@ app.get('/api/userworks/:userId',(req,res) =>{
     const userworks = userworks_query.all(userId);
     
     // to group rows based on their id
+    // TODO: Test this snippet and maybe refactor so its clean
     let userWorksAgg = [];
     userworks.forEach(row => {
         let work = {};
